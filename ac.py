@@ -11,11 +11,11 @@ from bs4 import BeautifulSoup
 
 
 TG_API_HOST = 'api.telegram.org'
-USERID = "johndoe"
-APIKEY = "deJhWBaqgd6QDN4BqJGf"
+USERID = "arun56"
+APIKEY = "wMjXmBIcHcdYqO2RrsVN"
 
 # Magic internet access
-#PROXIES = {"http": "http://127.0.0.1:10808", "https": "http://127.0.0.1:10808"}
+PROXIES = {"http": "http://127.0.0.1:10808", "https": "http://127.0.0.1:10808"}
 
 
 # Maximum number of login retry
@@ -282,13 +282,13 @@ def renew(
 
 
 def check(sess_id: str, session: requests.session):
-    print("傳送結果中.......")
+    print("反饋中.......")
     d = get_servers(sess_id, session)
     flag = True
     for key, val in d.items():
         if val:
             flag = False
-            log("[EUserv] ServerID: %s 續期失敗！德雞重傷，請自查原因" % key)
+            log("[EUserv] ServerID: %s 續期失敗！德雞吐血倒地，請自查原因" % key)
 
     if flag:
         log("[EUserv] **********一切OK，德雞在向你微笑！(≧▽≦)**********")
@@ -298,13 +298,37 @@ def check(sess_id: str, session: requests.session):
 def telegram():
     data = (
         ('chat_id', TG_USER_ID),
-        ('text', 'EUserv續期日誌\n\n' + desp)
+        ('text', 'EUserv續期日志\n\n' + desp)
     )
     response = requests.post('https://' + TG_API_HOST + '/bot' + TG_BOT_TOKEN + '/sendMessage', data=data)
     if response.status_code != 200:
         print('Telegram Bot 推送失敗')
     else:
-        print('Telegram Bot 推送成功')\
+        print('Telegram Bot 推送成功')
+
+# Server醬 http://sc.ftqq.com/?c=code
+def server_chan():
+    data = (
+        ('text', 'EUserv續期日志'),
+        ('desp', desp)
+    )
+    response = requests.post('https://sc.ftqq.com/' + SCKEY + '.send', data=data)
+    if response.status_code != 200:
+        print('Server醬 推送失敗')
+    else:
+        print('Server醬 推送成功')
+
+
+def sre24():
+    msg = 'EUserv續期日志\n\n' + desp
+    url = 'https://push.jwks123.cn/to/'
+    rs = requests.post(url, json=dict(token=SRE24_TOKEN, msg=msg)).json()
+    if int(rs["code"] / 100) != 2:
+        print('sre24 推送失敗')
+    else:
+        print('sre24 推送成功')
+
+
 if __name__ == "__main__":
     if not USERNAME or not PASSWORD:
         log("[EUserv] 你沒有添加任何賬戶")
@@ -336,5 +360,7 @@ if __name__ == "__main__":
         time.sleep(5)
 
     TG_BOT_TOKEN and TG_USER_ID and TG_API_HOST and telegram()
+    SCKEY and server_chan()
+    SRE24_TOKEN and sre24()
 
     print("*" * 30)
