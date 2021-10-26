@@ -39,7 +39,6 @@ if [ $release = "Centos" ]
 
 function ins(){
 function dj(){
-rm -f ac.py* deck.sh*
 echo -e nameserver 2a01:4f8:221:2d08::213 > /etc/resolv.conf
 apt update -y
 apt install python3 python3-pip -y
@@ -61,7 +60,13 @@ sed -i "12 s/^/TG_BOT_TOKEN = '$TG_BOT_TOKEN'\n/" ac.py
 read -p "TG用戶ID:" TG_USER_ID
 sed -i "13 s/^/TG_USER_ID = '$TG_USER_ID'\n/" ac.py
 
-ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+read -p "Server醬的key:" SCKEY
+sed -i "14 s/^/SCKEY = '$SCKEY'\n/" ac.py
+
+read -p "SRE24R的key:" SRE24_TOKEN
+sed -i "15 s/^/SRE24_TOKEN = '$SRE24_TOKEN'\n/" ac.py
+
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 sed -i '/ac.py/d' /var/spool/cron/crontabs/root >/dev/null 2>&1
 echo "0 10 * * * /usr/bin/python3 /root/ac.py >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
 chmod 777 /var/spool/cron/crontabs/root
@@ -72,7 +77,7 @@ python3 ac.py
 }
 
 function vps(){
-rm -f ac.py* deck.sh*
+rm -f ac.py* sjxq.sh*
 apt update -y
 apt install python3 python3-pip -y
 pip3 install requests beautifulsoup4
@@ -93,7 +98,13 @@ sed -i "12 s/^/TG_BOT_TOKEN = '$TG_BOT_TOKEN'\n/" ac.py
 read -p "TG用戶ID:" TG_USER_ID
 sed -i "13 s/^/TG_USER_ID = '$TG_USER_ID'\n/" ac.py
 
-ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+read -p "Server醬的key:" SCKEY
+sed -i "14 s/^/SCKEY = '$SCKEY'\n/" ac.py
+
+read -p "SRE24R的key:" SRE24_TOKEN
+sed -i "15 s/^/SRE24_TOKEN = '$SRE24_TOKEN'\n/" ac.py
+
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 sed -i '/ac.py/d' /var/spool/cron/crontabs/root >/dev/null 2>&1
 echo "0 10 * * * /usr/bin/python3 /root/ac.py >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
 chmod 777 /var/spool/cron/crontabs/root
@@ -133,7 +144,7 @@ crontab -e
 }
 
 function sj(){
-rm -f deck.sh*
+rm -f sjxq.sh*
 wget https://raw.githubusercontent.com/SAOJSM/DEU_CHICK_EXTEND_CHT/main/deck.sh && chmod +x deck.sh && ./deck.sh
 }
 
@@ -154,8 +165,14 @@ sed -i "12 s/^/TG_BOT_TOKEN = '$TG_BOT_TOKEN'\n/" ac.py
 read -p "TG用戶ID:" TG_USER_ID
 sed -i "13 s/^/TG_USER_ID = '$TG_USER_ID'\n/" ac.py
 
+read -p "Server醬的key:" SCKEY
+sed -i "14 s/^/SCKEY = '$SCKEY'\n/" ac.py
+
+read -p "SRE24R的key:" SRE24_TOKEN
+sed -i "15 s/^/SRE24_TOKEN = '$SRE24_TOKEN'\n/" ac.py
+
 sed -i '/ac.py/d' /var/spool/cron/crontabs/root >/dev/null 2>&1
-echo "0 5 * * * /usr/bin/python3 /root/ac.py >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
+echo "0 10 * * * /usr/bin/python3 /root/ac.py >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
 service cron restart
 
 python3 ac.py
@@ -164,7 +181,7 @@ python3 ac.py
 
 
 function xz(){
-rm -f ac.py* deck.sh* xqdj.sh*
+rm -f ac.py* sjxq.sh* xqdj.sh*
 sed -i '/ac.py/d' /var/spool/cron/crontabs/root >/dev/null 2>&1
 green "卸載完成"
 }
@@ -174,13 +191,11 @@ function start_menu(){
     clear
     yellow "================================================================"
     echo "環境要求：支持Ubuntu與Debain，目前不兼容WARP"   
-    echo "若要使用德雞本體續期請先關閉WARP"
-    echo "REPO地址：https://github.com/SAOJSM/DEU_CHICK_EXTEND_CHT "
-    echo "部落格：https://eggsfragrancememory.com"
+    echo "項目地址：https://github.com/SAOJSM/DEU_CHICK_EXTEND_CHT"
     yellow "================================================================="
-    blue " 1. 首次安裝選擇哪類VPS續期，安裝腳本需求"    
+    blue " 1. 首次安裝選擇哪類VPS續期，安裝腳本依賴 "    
     blue " 2. 自定義定時執行續期 "
-    blue " 3. 時間段內（上午3-5點）隨機執行續期 "
+    blue " 3. 時間段內（上午8-10點）隨機執行續期 "
     blue " 4. 重置：續期賬號、推送設置、續期時間 "
     blue " 5. 卸載續期腳本 "
     red " 0. 退出腳本 "
