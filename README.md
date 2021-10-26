@@ -10,4 +10,4 @@ wget -N wget https://github.com/SAOJSM/DEU_CHICK_EXTEND_CHT/raw/deck.sh && chmod
 
 進入選單方式```bash deck.sh```
 
-我的部落格:https://eggsfragrancememory.com
+歡迎多多STAR我的項目
