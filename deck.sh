@@ -46,7 +46,7 @@ apt install python3 python3-pip -y
 pip3 install requests beautifulsoup4
 apt-get install cron 
 
-wget https://github.com/SAOJSM/DEU_CHICK_EXTEND_CHT/raw/main/ac.py
+wget https://raw.githubusercontent.com/SAOJSM/DEU_CHICK_EXTEND_CHT/main/ac.py
 chmod +x ac.py
 
 read -p "德雞登錄用戶名:" USERNAME
@@ -78,7 +78,7 @@ apt install python3 python3-pip -y
 pip3 install requests beautifulsoup4
 apt-get install cron 
 
-wget https://github.com/SAOJSM/DEU_CHICK_EXTEND_CHT/raw/main/ac.py
+wget https://raw.githubusercontent.com/SAOJSM/DEU_CHICK_EXTEND_CHT/main/ac.py
 chmod +x ac.py
 
 read -p "德雞登錄用戶名:" USERNAME
@@ -134,12 +134,12 @@ crontab -e
 
 function sj(){
 rm -f deck.sh*
-wget https://github.com/SAOJSM/DEU_CHICK_EXTEND_CHT/raw/main/deck.sh && chmod +x deck.sh && ./deck.sh
+wget https://raw.githubusercontent.com/SAOJSM/DEU_CHICK_EXTEND_CHT/main/deck.sh && chmod +x deck.sh && ./deck.sh
 }
 
 function re(){
 rm -f ac.py*
-wget https://github.com/SAOJSM/DEU_CHICK_EXTEND_CHT/raw/main/ac.py
+wget https://raw.githubusercontent.com/SAOJSM/DEU_CHICK_EXTEND_CHT/main/ac.py
 chmod +x ac.py
 
 read -p "德雞登錄用戶名:" USERNAME
