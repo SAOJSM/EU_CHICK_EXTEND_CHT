@@ -60,15 +60,10 @@ sed -i "12 s/^/TG_BOT_TOKEN = '$TG_BOT_TOKEN'\n/" ac.py
 read -p "TG用戶ID:" TG_USER_ID
 sed -i "13 s/^/TG_USER_ID = '$TG_USER_ID'\n/" ac.py
 
-read -p "Server醬的key:" SCKEY
-sed -i "14 s/^/SCKEY = '$SCKEY'\n/" ac.py
-
-read -p "SRE24R的key:" SRE24_TOKEN
-sed -i "15 s/^/SRE24_TOKEN = '$SRE24_TOKEN'\n/" ac.py
 
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 sed -i '/ac.py/d' /var/spool/cron/crontabs/root >/dev/null 2>&1
-echo "0 10 * * * /usr/bin/python3 /root/ac.py >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
+echo "0 5 * * * /usr/bin/python3 /root/ac.py >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
 chmod 777 /var/spool/cron/crontabs/root
 crontab /var/spool/cron/crontabs/root
 service cron restart
@@ -77,7 +72,7 @@ python3 ac.py
 }
 
 function vps(){
-rm -f ac.py* sjxq.sh*
+rm -f ac.py* deck.sh*
 apt update -y
 apt install python3 python3-pip -y
 pip3 install requests beautifulsoup4
@@ -98,15 +93,10 @@ sed -i "12 s/^/TG_BOT_TOKEN = '$TG_BOT_TOKEN'\n/" ac.py
 read -p "TG用戶ID:" TG_USER_ID
 sed -i "13 s/^/TG_USER_ID = '$TG_USER_ID'\n/" ac.py
 
-read -p "Server醬的key:" SCKEY
-sed -i "14 s/^/SCKEY = '$SCKEY'\n/" ac.py
 
-read -p "SRE24R的key:" SRE24_TOKEN
-sed -i "15 s/^/SRE24_TOKEN = '$SRE24_TOKEN'\n/" ac.py
-
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 sed -i '/ac.py/d' /var/spool/cron/crontabs/root >/dev/null 2>&1
-echo "0 10 * * * /usr/bin/python3 /root/ac.py >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
+echo "0 5 * * * /usr/bin/python3 /root/ac.py >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
 chmod 777 /var/spool/cron/crontabs/root
 crontab /var/spool/cron/crontabs/root
 service cron restart
@@ -144,7 +134,7 @@ crontab -e
 }
 
 function sj(){
-rm -f sjxq.sh*
+rm -f deck.sh*
 wget https://raw.githubusercontent.com/SAOJSM/DEU_CHICK_EXTEND_CHT/main/deck.sh && chmod +x deck.sh && ./deck.sh
 }
 
@@ -165,14 +155,9 @@ sed -i "12 s/^/TG_BOT_TOKEN = '$TG_BOT_TOKEN'\n/" ac.py
 read -p "TG用戶ID:" TG_USER_ID
 sed -i "13 s/^/TG_USER_ID = '$TG_USER_ID'\n/" ac.py
 
-read -p "Server醬的key:" SCKEY
-sed -i "14 s/^/SCKEY = '$SCKEY'\n/" ac.py
-
-read -p "SRE24R的key:" SRE24_TOKEN
-sed -i "15 s/^/SRE24_TOKEN = '$SRE24_TOKEN'\n/" ac.py
 
 sed -i '/ac.py/d' /var/spool/cron/crontabs/root >/dev/null 2>&1
-echo "0 10 * * * /usr/bin/python3 /root/ac.py >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
+echo "0 5 * * * /usr/bin/python3 /root/ac.py >/dev/null 2>&1" >> /var/spool/cron/crontabs/root
 service cron restart
 
 python3 ac.py
@@ -181,7 +166,7 @@ python3 ac.py
 
 
 function xz(){
-rm -f ac.py* sjxq.sh* xqdj.sh*
+rm -f ac.py* sjxq.sh* deck.sh*
 sed -i '/ac.py/d' /var/spool/cron/crontabs/root >/dev/null 2>&1
 green "卸載完成"
 }
