@@ -5,7 +5,7 @@
 僅支援支持TGBOT通知
 
 ```
-wget -N wget https://raw.githubusercontent.com/SAOJSM/DEU_CHICK_EXTEND_CHT/main/deck.sh && chmod 755 deck.sh && ./deck.sh
+wget -N https://raw.githubusercontent.com/SAOJSM/DEU_CHICK_EXTEND_CHT/main/deck.sh && chmod 755 deck.sh && ./deck.sh
 ```
 
 進入選單方式```bash deck.sh```
