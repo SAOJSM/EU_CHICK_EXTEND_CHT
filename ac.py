@@ -304,9 +304,9 @@ def telegram():
         print('Telegram Bot 推送成功')
 
         if __name__ == "__main__":
-    if not USERNAME or not PASSWORD:
-        log("[EUserv] 你沒有添加任何賬戶")
-        exit(1)
+            if not USERNAME or not PASSWORD:
+            log("[EUserv] 你沒有添加任何賬戶")
+            exit(1)
     user_list = USERNAME.strip().split()
     passwd_list = PASSWORD.strip().split()
     if len(user_list) != len(passwd_list):
