@@ -2,7 +2,7 @@
 
 德雞續期專用腳本，實現自動續期，需自有VPS
 
-僅支援支持TGBOT通知
+僅支援TGBOT通知
 
 ```
 wget -N https://raw.githubusercontent.com/SAOJSM/DEU_CHICK_EXTEND_CHT/main/deck.sh && chmod 755 deck.sh && ./deck.sh
