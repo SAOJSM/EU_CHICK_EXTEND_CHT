@@ -72,7 +72,7 @@ python3 ac.py
 }
 
 function vps(){
-rm -f ac.py* deck.sh*
+#rm -f ac.py* deck.sh*
 apt update -y
 apt install python3 python3-pip -y
 pip3 install requests beautifulsoup4
