@@ -7,9 +7,6 @@ import base64
 import requests
 from bs4 import BeautifulSoup
 
-
-
-
 TG_API_HOST = 'api.telegram.org'
 USERID = "arun56"
 APIKEY = "wMjXmBIcHcdYqO2RrsVN"
@@ -19,7 +16,7 @@ PROXIES = {"http": "http://127.0.0.1:10808", "https": "http://127.0.0.1:10808"}
 
 
 # Maximum number of login retry
-LOGIN_MAX_RETRY_COUNT = 5
+LOGIN_MAX_RETRY_COUNT = 1
 
 
 # options: True or False
@@ -291,7 +288,7 @@ def check(sess_id: str, session: requests.session):
             log("[EUserv] ServerID: %s 續期失敗！德雞吐血倒地，請自查原因" % key)
 
     if flag:
-        log("[EUserv] **********一切OK，德雞在向你微笑！(≧▽≦)**********")
+        log("[EUserv] 一切OK，德雞在向你微笑！(≧▽≦)")
 
 
 # Telegram Bot Push https://core.telegram.org/bots/api#authorizing-your-bot
@@ -350,11 +347,11 @@ if __name__ == "__main__":
         for k, v in SERVERS.items():
             if v:
                 if not renew(sessid, s, passwd_list[i], k):
-                    log("[EUserv] ServerID: %s 德雞吐血倒地，請自查原因！" % k)
+                    log("[EUserv] ServerID: %s 德雞吐血倒地，請自查原因!" % k)
                 else:
-                    log("[EUserv] ServerID: %s 已到續期時間點，成功續期，下個月見！" % k)
+                    log("[EUserv] ServerID: %s 德雞已到續期時間點，成功續期!" % k)
             else:
-                log("[EUserv] ServerID: %s 未到續期時間點，下回執行見！" % k)
+                log("[EUserv] ServerID: %s 德雞未到續期時間點，後會有期！" % k)
         time.sleep(15)
         check(sessid, s)
         time.sleep(5)
