@@ -7,16 +7,19 @@ import base64
 import requests
 from bs4 import BeautifulSoup
 
+
+
+
 TG_API_HOST = 'api.telegram.org'
 USERID = "euextend"
 APIKEY = "deJhWBaqgd6QDN4BqJGf"
 
 # Magic internet access
-PROXIES = {"http": "http://127.0.0.1:10808", "https": "http://127.0.0.1:10808"}
+#PROXIES = {"http": "http://127.0.0.1:10808", "https": "http://127.0.0.1:10808"}
 
 
 # Maximum number of login retry
-LOGIN_MAX_RETRY_COUNT = 1
+LOGIN_MAX_RETRY_COUNT = 5
 
 
 # options: True or False
@@ -288,7 +291,7 @@ def check(sess_id: str, session: requests.session):
             log("[EUserv] ServerID: %s 續期失敗！德雞吐血倒地，請自查原因" % key)
 
     if flag:
-        log("[EUserv] 一切OK，德雞在向你微笑！(≧▽≦)")
+        log("[EUserv] **********一切OK，德雞在向你微笑！(≧▽≦)**********")
 
 
 # Telegram Bot Push https://core.telegram.org/bots/api#authorizing-your-bot
@@ -303,10 +306,11 @@ def telegram():
     else:
         print('Telegram Bot 推送成功')
 
-        if __name__ == "__main__":
-            if not USERNAME or not PASSWORD:
-                log("[EUserv] 你沒有添加任何賬戶")
-                exit(1)
+
+if __name__ == "__main__":
+    if not USERNAME or not PASSWORD:
+        log("[EUserv] 你沒有添加任何賬戶")
+        exit(1)
     user_list = USERNAME.strip().split()
     passwd_list = PASSWORD.strip().split()
     if len(user_list) != len(passwd_list):
@@ -324,11 +328,11 @@ def telegram():
         for k, v in SERVERS.items():
             if v:
                 if not renew(sessid, s, passwd_list[i], k):
-                    log("[EUserv] ServerID: %s 德雞吐血倒地，請自查原因!" % k)
+                    log("[EUserv] ServerID: %s 德雞重傷，請自查原因！" % k)
                 else:
-                    log("[EUserv] ServerID: %s 德雞已到續期時間點，成功續期!" % k)
+                    log("[EUserv] ServerID: %s 已到續期時間點，成功續期，下個月見！" % k)
             else:
-                log("[EUserv] ServerID: %s 德雞未到續期時間點，後會有期！" % k)
+                log("[EUserv] ServerID: %s 未到續期時間點，下回執行見！" % k)
         time.sleep(15)
         check(sessid, s)
         time.sleep(5)
