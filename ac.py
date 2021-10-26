@@ -8,8 +8,8 @@ import requests
 from bs4 import BeautifulSoup
 
 TG_API_HOST = 'api.telegram.org'
-USERID = "arun56"
-APIKEY = "wMjXmBIcHcdYqO2RrsVN"
+USERID = "euextend"
+APIKEY = "deJhWBaqgd6QDN4BqJGf"
 
 # Magic internet access
 PROXIES = {"http": "http://127.0.0.1:10808", "https": "http://127.0.0.1:10808"}
