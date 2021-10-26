@@ -298,7 +298,7 @@ def check(sess_id: str, session: requests.session):
 def telegram():
     data = (
         ('chat_id', TG_USER_ID),
-        ('text', 'EUserv續期日志\n\n' + desp)
+        ('text', 'EUserv續期日誌\n\n' + desp)
     )
     response = requests.post('https://' + TG_API_HOST + '/bot' + TG_BOT_TOKEN + '/sendMessage', data=data)
     if response.status_code != 200:
