@@ -282,13 +282,13 @@ def renew(
 
 
 def check(sess_id: str, session: requests.session):
-    print("反饋中.......")
+    print("傳送結果中.......")
     d = get_servers(sess_id, session)
     flag = True
     for key, val in d.items():
         if val:
             flag = False
-            log("[EUserv] ServerID: %s 續期失敗！德雞吐血倒地，請自查原因" % key)
+            log("[EUserv] ServerID: %s 續期失敗！德雞重傷，請自查原因" % key)
 
     if flag:
         log("[EUserv] **********一切OK，德雞在向你微笑！(≧▽≦)**********")
@@ -298,7 +298,7 @@ def check(sess_id: str, session: requests.session):
 def telegram():
     data = (
         ('chat_id', TG_USER_ID),
-        ('text', 'EUserv續期日志\n\n' + desp)
+        ('text', 'EUserv續期日誌\n\n' + desp)
     )
     response = requests.post('https://' + TG_API_HOST + '/bot' + TG_BOT_TOKEN + '/sendMessage', data=data)
     if response.status_code != 200:
@@ -336,7 +336,5 @@ if __name__ == "__main__":
         time.sleep(5)
 
     TG_BOT_TOKEN and TG_USER_ID and TG_API_HOST and telegram()
-    SCKEY and server_chan()
-    SRE24_TOKEN and sre24()
 
     print("*" * 30)
