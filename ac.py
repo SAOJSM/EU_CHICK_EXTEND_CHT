@@ -303,30 +303,7 @@ def telegram():
     else:
         print('Telegram Bot 推送成功')
 
-# Server醬 http://sc.ftqq.com/?c=code
-def server_chan():
-    data = (
-        ('text', 'EUserv續期日志'),
-        ('desp', desp)
-    )
-    response = requests.post('https://sc.ftqq.com/' + SCKEY + '.send', data=data)
-    if response.status_code != 200:
-        print('Server醬 推送失敗')
-    else:
-        print('Server醬 推送成功')
-
-
-def sre24():
-    msg = 'EUserv續期日志\n\n' + desp
-    url = 'https://push.jwks123.cn/to/'
-    rs = requests.post(url, json=dict(token=SRE24_TOKEN, msg=msg)).json()
-    if int(rs["code"] / 100) != 2:
-        print('sre24 推送失敗')
-    else:
-        print('sre24 推送成功')
-
-
-if __name__ == "__main__":
+        if __name__ == "__main__":
     if not USERNAME or not PASSWORD:
         log("[EUserv] 你沒有添加任何賬戶")
         exit(1)
@@ -357,7 +334,5 @@ if __name__ == "__main__":
         time.sleep(5)
 
     TG_BOT_TOKEN and TG_USER_ID and TG_API_HOST and telegram()
-    SCKEY and server_chan()
-    SRE24_TOKEN and sre24()
 
     print("*" * 30)
