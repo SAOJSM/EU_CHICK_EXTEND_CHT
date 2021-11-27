@@ -8,7 +8,7 @@
 [複製Telegram ID] https://t.me/userinfobot**  
 
 ## 步驟1  
-[取得Gmail API] https://console.cloud.google.com/  
+**[取得Gmail API] https://console.cloud.google.com/**  
 ### 1-1 登入接收德雞的帳戶  
 ### 1-2 新建應用程式(建議名稱設定為Gmail比較好找)  
 ### 1-3 搜尋 Gmail API 並啟用  
@@ -54,7 +54,9 @@
     輸入 0 1 * * * /usr/bin/python3 /root/eu.py  
 **0 1 * * * 定義為每天0點1分執行，可自行修改為對應時間，/root/eu.py請改為eu.py所在路徑**  
 依序按下Ctrl+X、Y、Enter  
+
     輸入 crontab -l  
+    
 **crontab -l是為了查看是否有成功設定crontab**  
   
 **歡迎多多STAR我的項目  
