@@ -382,7 +382,7 @@ def telegram():
 
 if __name__ == "__main__":
     if not USERNAME or not PASSWORD:
-        log("[EUserv] 你沒有添加任何賬戶")
+        log("[EUserv] 你沒有添加任何帳戶")
         exit(1)
     user_list = USERNAME.strip().split()
     passwd_list = PASSWORD.strip().split()
@@ -392,7 +392,7 @@ if __name__ == "__main__":
     for i in range(len(user_list)):
         userId = user_list[i]
         log("*" * 30)
-        log("[EUserv] 正在續期第 %d 個賬號 %s" % (i + 1, userId))
+        log("[EUserv] 正在續期第 %d 個帳號 %s" % (i + 1, userId))
         sessid, s = login(user_list[i], passwd_list[i])
         if sessid == "-1":
             log("[EUserv] 第 %d 個帳號登入失敗，請檢查登入訊息" % (i + 1))
