@@ -2,6 +2,9 @@
 ### 僅支援TGBOT通知  
 ### 5分鐘設定  
 ### 輕鬆完成德雞續期  
+  
+  
+# TRUECAPTCHA限額  
 ### 下面兩項因TRUECAPTCHA每日100次觸發限額，建議修改為自己的
     TRUECAPTCHA_USERID = os.environ.get("TRUECAPTCHA_USERID", "euextend")
     TRUECAPTCHA_APIKEY = os.environ.get("TRUECAPTCHA_APIKEY", "deJhWBaqgd6QDN4BqJGf")
