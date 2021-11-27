@@ -1,29 +1,43 @@
 #! /usr/bin/env python3
 
+import os
 import re
 import json
 import time
 import base64
+
+from email.mime.application import MIMEApplication
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from smtplib import SMTP_SSL, SMTPDataError
+
 import requests
 from bs4 import BeautifulSoup
+from base64 import urlsafe_b64decode
+from gmail_api import *
 
+dir_name = os.path.dirname(os.path.abspath(__file__)) + os.sep
+os.chdir(dir_name)
 
-
-
+TG_BOT_TOKEN = '你的TG_BOT_TOKEN'
+TG_USER_ID = '你的TG_USER_ID'
 TG_API_HOST = 'api.telegram.org'
-USERID = "euextend"
-APIKEY = "deJhWBaqgd6QDN4BqJGf"
 
-# Magic internet access
-#PROXIES = {"http": "http://127.0.0.1:10808", "https": "http://127.0.0.1:10808"}
+# 多個帳戶請使用空格隔開
+USERNAME = os.environ.get("EUSERV_USERNAME", "EUSERV_USERNAME")  
+PASSWORD = os.environ.get("EUSERV_PASSWORD", "EUSERV_PASSWORD") 
 
+TRUECAPTCHA_USERID = os.environ.get("TRUECAPTCHA_USERID", "euextend")
+TRUECAPTCHA_APIKEY = os.environ.get("TRUECAPTCHA_APIKEY", "deJhWBaqgd6QDN4BqJGf")
+
+PIN_KEY_WORD = 'EUserv - PIN for'
 
 # Maximum number of login retry
 LOGIN_MAX_RETRY_COUNT = 5
 
 
 # options: True or False
-CHECK_CAPTCHA_SOLVER_USAGE = True
+TRUECAPTCHA_CHECK_USAGE = True
 
 
 user_agent = (
@@ -32,11 +46,12 @@ user_agent = (
 )
 desp = ""  # 空值
 
+unixTimeToDate = lambda t: time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(t))
 
 def log(info: str):
     print(info)
     global desp
-    desp = desp + info + "\n\n"
+    desp = desp + info + "\n"
 
 
 def login_retry(*args, **kwargs):
@@ -50,15 +65,18 @@ def login_retry(*args, **kwargs):
             number = 0
             if ret == "-1":
                 while number < max_retry:
-                    number += 1
-                    if number > 1:
-                        log("[EUserv] Login tried the {}th time".format(number))
-                    sess_id, session = func(username, password)
-                    if sess_id != "-1":
-                        return sess_id, session
-                    else:
-                        if number == max_retry:
+                    try:
+                        number += 1
+                        if number > 1:
+                            log("[EUserv] Login tried the {}th time".format(number))
+                        sess_id, session = func(username, password)
+                        if sess_id != "-1":
                             return sess_id, session
+                        else:
+                            if number == max_retry:
+                                return sess_id, session
+                    except BaseException as e:
+                        log(str(e))
             else:
                 return ret, ret_session
 
@@ -73,15 +91,15 @@ def captcha_solver(captcha_image_url: str, session: requests.session) -> dict:
     Free to use 100 requests per day.
     """
     response = session.get(captcha_image_url)
-    encoded_string = base64.b64encode(response.content)
+    encoded_string = base64.b64encode(response.content).decode()
     url = "https://api.apitruecaptcha.org/one/gettext"
 
     data = {
-        "userid": USERID,
-        "apikey": APIKEY,
+        "userid": TRUECAPTCHA_USERID,
+        "apikey": TRUECAPTCHA_APIKEY,
         "case": "mixed",
-        "mode": "human",
-        "data": str(encoded_string)[2:-1],
+        "mode": "default", #(human | default)
+        "data": encoded_string
     }
     r = requests.post(url=url, json=data)
     j = json.loads(r.text)
@@ -94,7 +112,7 @@ def handle_captcha_solved_result(solved: dict) -> str:
     that's what this function is for.
     """
     if "result" in solved:
-        solved_text = solved["result"]
+        solved_text = str(solved["result"])
         if "RESULT  IS" in solved_text:
             log("[Captcha Solver] You are using the demo apikey.")
             print("There is no guarantee that demo apikey will work in the future!")
@@ -134,8 +152,8 @@ def get_captcha_solver_usage() -> dict:
     url = "https://api.apitruecaptcha.org/one/getusage"
 
     params = {
-        "username": USERID,
-        "apikey": APIKEY,
+        "username": TRUECAPTCHA_USERID,
+        "apikey": TRUECAPTCHA_APIKEY,
     }
     r = requests.get(url=url, params=params)
     j = json.loads(r.text)
@@ -183,7 +201,7 @@ def login(username: str, password: str) -> (str, requests.session):
             captcha_code = handle_captcha_solved_result(solved_result)
             log("[Captcha Solver] 識別的驗證碼是: {}".format(captcha_code))
 
-            if CHECK_CAPTCHA_SOLVER_USAGE:
+            if TRUECAPTCHA_CHECK_USAGE:
                 usage = get_captcha_solver_usage()
                 log(
                     "[Captcha Solver] current date {0} api usage count: {1}".format(
@@ -241,6 +259,21 @@ def get_servers(sess_id: str, session: requests.session) -> {}:
     return d
 
 
+def get_verification_code(service, email_id, request_time):
+    email = service.users().messages().get(userId='me', id=email_id.get('id')).execute()
+    internalDate = float(email.get("internalDate")) / 1000
+
+    if internalDate > request_time-30:
+        if email.get('payload').get('body').get('size'):
+            data = urlsafe_b64decode(email.get('payload').get('body').get('data')).decode()
+        else:
+            part = email.get('payload').get("parts")[0]
+            data = urlsafe_b64decode(part.get('body').get('data')).decode()
+        pin_code_re = re.search('PIN:\s+(.+?)\s+', data)
+        pin_code = pin_code_re.group(1) if pin_code_re else None
+        return pin_code
+
+
 def renew(
     sess_id: str, session: requests.session, password: str, order_id: str
 ) -> bool:
@@ -251,50 +284,91 @@ def renew(
         "origin": "https://support.euserv.com",
         "Referer": "https://support.euserv.com/index.iphp",
     }
-    data = {
+
+    r = session.post(url, headers=headers, data={
         "Submit": "Extend contract",
         "sess_id": sess_id,
         "ord_no": order_id,
         "subaction": "choose_order",
+        "show_contract_extension": "1",
         "choose_order_subaction": "show_contract_details",
-    }
-    session.post(url, headers=headers, data=data)
-    data = {
+    })
+
+    r = session.post(url, headers=headers, data={
+        "sess_id": sess_id,
+        "subaction": "kc2_customer_contract_details_get_change_plan_dialog",
+        "ord_id": order_id,
+        "show_manual_extension_if_available": "1",
+    })
+
+    # send pin code
+    request_time = time.time()
+    log(f'[EUserv] Send pin code to {userId} Time: {unixTimeToDate(request_time)}')
+    r = session.post(url, headers=headers, data={
+        "sess_id": sess_id,
+        "subaction": "show_kc2_security_password_dialog",
+        "prefix":	"kc2_customer_contract_details_extend_contract_",
+        "type":	"1",
+    })
+
+    pin_code = ''
+    service = gmail_authenticate(userId=userId)
+    # get emails that match the query you specify from the command lines
+    while time.time() < request_time + 120: # wait 2 min
+        results = search_messages(service, PIN_KEY_WORD)
+        print('Email id search result:' , results)
+        # for each email matched, read it (output plain/text to console & save HTML and attachments)
+        if results:
+            pin_code = get_verification_code(service, results[0], request_time)
+            if pin_code:
+                log('[Email] pin code:' + pin_code)
+                break
+        time.sleep(5)
+        
+    if not pin_code:
+        return False
+
+    r = session.post(url, headers=headers, data={
+        "auth": pin_code,
         "sess_id": sess_id,
         "subaction": "kc2_security_password_get_token",
         "prefix": "kc2_customer_contract_details_extend_contract_",
-        "password": password,
-    }
-    f = session.post(url, headers=headers, data=data)
-    f.raise_for_status()
-    if not json.loads(f.text)["rs"] == "success":
+        "type": "1",
+        "ident": "kc2_customer_contract_details_extend_contract_" + order_id,
+    })
+    if not r.json().get("rs") == "success":
         return False
-    token = json.loads(f.text)["token"]["value"]
-    data = {
+    token = r.json().get('token').get('value')
+
+    r = session.post(url, headers=headers, data={
+        "sess_id": sess_id,
+        "subaction": "kc2_customer_contract_details_get_extend_contract_confirmation_dialog",
+        "token": token,
+    })
+    r = session.post(url, headers=headers, data={
         "sess_id": sess_id,
         "ord_id": order_id,
         "subaction": "kc2_customer_contract_details_extend_contract_term",
         "token": token,
-    }
-    session.post(url, headers=headers, data=data)
+    })
+
     time.sleep(5)
     return True
 
 
 def check(sess_id: str, session: requests.session):
-    print("反饋中.......")
+    print("Checking.......")
     d = get_servers(sess_id, session)
     flag = True
     for key, val in d.items():
         if val:
             flag = False
-            log("[EUserv] ServerID: %s 續期失敗！德雞吐血倒地，請自查原因" % key)
+            log("[EUserv] ServerID: %s Renew Failed!" % key)
 
     if flag:
-        log("[EUserv] **********一切OK，德雞在向你微笑！(≧▽≦)**********")
+        log("[EUserv] 續期作業已完成")
 
 
-# Telegram Bot Push https://core.telegram.org/bots/api#authorizing-your-bot
 def telegram():
     data = (
         ('chat_id', TG_USER_ID),
@@ -306,7 +380,6 @@ def telegram():
     else:
         print('Telegram Bot 推送成功')
 
-
 if __name__ == "__main__":
     if not USERNAME or not PASSWORD:
         log("[EUserv] 你沒有添加任何賬戶")
@@ -317,26 +390,25 @@ if __name__ == "__main__":
         log("[EUserv] The number of usernames and passwords do not match!")
         exit(1)
     for i in range(len(user_list)):
-        print("*" * 30)
-        log("[EUserv] 正在續期第 %d 個賬號" % (i + 1))
+        userId = user_list[i]
+        log("*" * 30)
+        log("[EUserv] 正在續期第 %d 個賬號 %s" % (i + 1, userId))
         sessid, s = login(user_list[i], passwd_list[i])
         if sessid == "-1":
-            log("[EUserv] 第 %d 個賬號登陸失敗，請檢查登錄信息" % (i + 1))
+            log("[EUserv] 第 %d 個帳號登入失敗，請檢查登入訊息" % (i + 1))
             continue
         SERVERS = get_servers(sessid, s)
-        log("[EUserv] 檢測到第 {} 個賬號有 {} 台 VPS，正在嘗試續期".format(i + 1, len(SERVERS)))
+        log("[EUserv] 檢測到第 {} 個帳號有 {} 台 VPS，正在嘗試續期".format(i + 1, len(SERVERS)))
         for k, v in SERVERS.items():
             if v:
                 if not renew(sessid, s, passwd_list[i], k):
-                    log("[EUserv] ServerID: %s 德雞重傷，請自查原因！" % k)
+                    log("[EUserv] ServerID: %s Renew Error!" % k)
                 else:
-                    log("[EUserv] ServerID: %s 已到續期時間點，成功續期，下個月見！" % k)
+                    log("[EUserv] ServerID: %s has been successfully renewed!" % k)
             else:
-                log("[EUserv] ServerID: %s 未到續期時間點，下回執行見！" % k)
+                log("[EUserv] ServerID: %s does not need to be renewed" % k)
         time.sleep(15)
         check(sessid, s)
         time.sleep(5)
 
     TG_BOT_TOKEN and TG_USER_ID and TG_API_HOST and telegram()
-
-    print("*" * 30)
