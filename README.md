@@ -1,11 +1,12 @@
 **# 德雞續期專用腳本，實現自動續期，需自有VPS、德雞信箱要是GMAIL  
 # 僅支援TGBOT通知  
 # 5分鐘設定  
-# 輕鬆完成德雞續期**  
+# 輕鬆完成德雞續期  
+**  
 
-**前置工作  
-請到Telegram找Bot Father申請一個機器人 [Bot Father] https://t.me/BotFather 並複製Bot Token  
-[複製Telegram ID] https://t.me/userinfobot**  
+**# 前置工作  
+## 請到Telegram找Bot Father申請一個機器人 [Bot Father] https://t.me/BotFather 並複製Bot Token  
+## [複製Telegram ID] https://t.me/userinfobot**  
 
 ## 步驟1  
 **[取得Gmail API] https://console.cloud.google.com/**  
@@ -20,7 +21,7 @@
 ### 2-4 之後一直點繼續直到摘要  
 ### 2-5 點擊ADD USER  
 ### 2-6 填入自己的EMAIL  
-**因自己要用，所以沒必要發布**  
+## **因自己要用，所以沒必要發布**  
 
 ## 步驟3  
 ### 3-1 點擊憑證  
@@ -33,10 +34,10 @@
 ## 步驟4  
 ### 4-1 打開VPS  
 ### 4-2 把credentials.json及本專案的eu.py、gmail_api.py放入vps主目錄  
-**一般為/root，若非root用戶主目錄為/home**  
+**## 一般為/root，若非root用戶主目錄為/home**  
 ### 4-3 輸入 pip3 install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib beautifulsoup4 requests pysocks  
 ### 4-4 安裝完成依賴項輸入 python3 gmail_api.py 你的email 並黏貼網址到瀏覽器同意授權  
-**範例:若email為 abc@gmail.com 就輸入 python3 gmail_api.py abc@gmail.com**  
+**## 範例:若email為 abc@gmail.com 就輸入 python3 gmail_api.py abc@gmail.com**  
 ### 4-5 授權完成後回到vps 按下Ctrl+C  
 ### 4-6 修改eu.py的這4個項目項目，修改完儲存  
   
@@ -53,7 +54,7 @@
     輸入 crontab -e  
     輸入 0 1 * * * /usr/bin/python3 /root/eu.py  
 **0 1 * * * 定義為每天0點1分執行，可自行修改為對應時間，/root/eu.py請改為eu.py所在路徑**  
-依序按下Ctrl+X、Y、Enter  
+## 依序按下Ctrl+X、Y、Enter  
 
     輸入 crontab -l  
     
