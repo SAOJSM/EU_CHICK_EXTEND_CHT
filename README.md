@@ -17,7 +17,7 @@
 
 ## 步驟1  
 ### [取得Gmail API] https://console.cloud.google.com/  
-### 1-1 登入接收德雞的帳戶  
+### 1-1 登入接收德雞PIN CODE的帳戶  
 ### 1-2 新建應用程式(建議名稱設定為Gmail比較好找)  
 ### 1-3 搜尋 Gmail API 並啟用  
 
