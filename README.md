@@ -1,13 +1,11 @@
-**
 # 德雞續期專用腳本，實現自動續期，需自有VPS、德雞信箱要是GMAIL  
 # 僅支援TGBOT通知  
 # 5分鐘設定  
-# 輕鬆完成德雞續期
-**  
+# 輕鬆完成德雞續期 
 
-**# 前置工作  
+# 前置工作  
 ## 請到Telegram找Bot Father申請一個機器人 [Bot Father] https://t.me/BotFather 並複製Bot Token  
-## [複製Telegram ID] https://t.me/userinfobot**  
+## [複製Telegram ID] https://t.me/userinfobot
 
 ## 步驟1  
 **[取得Gmail API] https://console.cloud.google.com/**  
