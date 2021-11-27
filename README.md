@@ -10,7 +10,7 @@
 ### [複製Telegram ID] https://t.me/userinfobot
 
 ## 步驟1  
-**[取得Gmail API] https://console.cloud.google.com/**  
+### [取得Gmail API] https://console.cloud.google.com/  
 ### 1-1 登入接收德雞的帳戶  
 ### 1-2 新建應用程式(建議名稱設定為Gmail比較好找)  
 ### 1-3 搜尋 Gmail API 並啟用  
@@ -35,7 +35,7 @@
 ## 步驟4  
 ### 4-1 打開VPS  
 ### 4-2 把credentials.json及本專案的eu.py、gmail_api.py放入vps主目錄  
-**## 一般為/root，若非root用戶主目錄為/home**  
+## 一般為/root，若非root用戶主目錄為/home   
 ### 4-3 輸入 pip3 install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib beautifulsoup4 requests pysocks  
 ### 4-4 安裝完成依賴項輸入 python3 gmail_api.py 你的email 並黏貼網址到瀏覽器同意授權  
 **## 範例:若email為 abc@gmail.com 就輸入 python3 gmail_api.py abc@gmail.com**  
