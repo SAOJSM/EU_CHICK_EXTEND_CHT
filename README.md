@@ -52,13 +52,14 @@
   
 ## 步驟5  
 ### 5-1 成功執行程式後 將其排入定時任務  
-    輸入 crontab -e  
-    輸入 0 1 * * * /usr/bin/python3 /root/eu.py  
+     crontab -e  
+  
+     0 1 * * * /usr/bin/python3 /root/eu.py  
 **0 1 * * * 定義為每天0點1分執行，可自行修改為對應時間，/root/eu.py請改為eu.py所在路徑**  
   
 ### 依序按下Ctrl+X、Y、Enter  
 
-    輸入 crontab -l  
+    crontab -l  
     
 **crontab -l是為了查看是否有成功設定crontab**  
   
