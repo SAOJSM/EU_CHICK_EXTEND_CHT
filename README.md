@@ -36,7 +36,7 @@
 **一般為/root，若非root用戶主目錄為/home**  
 ### 4-3 輸入 pip3 install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib beautifulsoup4 requests pysocks  
 ### 4-4 安裝完成依賴項輸入 python3 gmail_api.py 你的email 並黏貼網址到瀏覽器同意授權  
-**範例:若email為abc@gmail.com  就輸入 python3 gmail_api.py abc@gmail.com**  
+**範例:若email為 abc@gmail.com 就輸入 python3 gmail_api.py abc@gmail.com**  
 ### 4-5 授權完成後回到vps 按下Ctrl+C  
 ### 4-6 修改eu.py的這4個項目項目，修改完儲存  
   
@@ -50,11 +50,11 @@
   
 ## 步驟5  
 ### 5-1 成功執行程式後 將其排入定時任務  
-輸入 crontab -e  
-輸入 0 1 * * * /usr/bin/python3 /root/eu.py  
+    輸入 crontab -e  
+    輸入 0 1 * * * /usr/bin/python3 /root/eu.py  
 **0 1 * * * 定義為每天0點1分執行，可自行修改為對應時間，/root/eu.py請改為eu.py所在路徑**  
 依序按下Ctrl+X、Y、Enter  
-輸入 crontab -l  
+    輸入 crontab -l  
 **crontab -l是為了查看是否有成功設定crontab**  
   
 **歡迎多多STAR我的項目  
