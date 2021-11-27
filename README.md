@@ -5,7 +5,8 @@
   
   
 # 前置工作  
-### 請到Telegram找Bot Father申請一個機器人 [Bot Father] https://t.me/BotFather 並複製Bot Token  
+### 請到Telegram找Bot Father申請一個機器人  
+### [Bot Father] https://t.me/BotFather 並複製Bot Token  
 ### [複製Telegram ID] https://t.me/userinfobot
 
 ## 步驟1  
@@ -60,6 +61,6 @@
     
 **crontab -l是為了查看是否有成功設定crontab**  
   
-**歡迎多多STAR我的項目  
-若是執行上有什麼問題  
-請透過issue提出**  
+## 歡迎多多STAR我的項目  
+## 若是執行上有什麼問題  
+## 請透過issue提出
