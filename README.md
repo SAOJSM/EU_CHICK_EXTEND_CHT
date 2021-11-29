@@ -40,7 +40,9 @@
 
 ## 步驟4  
 ### 4-1 打開VPS  
-### 4-2 把credentials.json及本專案的eu.py、gmail_api.py放入vps主目錄  
+### 4-2 把credentials.json及本專案的eu.py、gmail_api.py放入vps主目錄
+    wget https://raw.githubusercontent.com/SAOJSM/EU_CHICK_EXTEND_CHT/main/gmail_api.py
+    wget https://raw.githubusercontent.com/SAOJSM/EU_CHICK_EXTEND_CHT/main/eu.py
 ### 一般為/root，若非root用戶主目錄為/home   
 ### 4-3  
     pip3 install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib beautifulsoup4 requests pysocks  
