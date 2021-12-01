@@ -44,11 +44,12 @@
     wget https://raw.githubusercontent.com/SAOJSM/EU_CHICK_EXTEND_CHT/main/gmail_api.py
     wget https://raw.githubusercontent.com/SAOJSM/EU_CHICK_EXTEND_CHT/main/eu.py
 ### 一般為/root，若非root用戶主目錄為/home   
-### 4-3  
-    pip3 install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib beautifulsoup4 requests pysocks  
-### 4-4 安裝完成依賴項輸入 python3 gmail_api.py 你的email 並黏貼網址到瀏覽器同意授權  
-**## 範例:若email為 abc@gmail.com 就輸入 python3 gmail_api.py abc@gmail.com**  
-### 4-5 授權完成後回到vps 按下Ctrl+C  
+### 4-3  首次執行請使用windows，第二次執行再使用vps輸入以下指令
+    pip3 install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib beautifulsoup4 requests pysocks 
+### 備註:Windows同樣要有eu.py、gmail_api.py、credential.json
+### 4-4 首次執行安裝完成依賴項輸入以下指令 並黏貼網址到瀏覽器同意授權  
+    python3 gmail_api.py 你的email  
+### 4-5 授權完成後取得"token_你的email.json"
 ### 4-6 修改eu.py的這4個項目項目，修改完儲存  
   
     TG_BOT_TOKEN = '你的TG BOT TOKEN'  
@@ -60,7 +61,7 @@
 ### 4-8 等待程式完成，TG機器人會通知  
   
 ## 步驟5  
-### 5-1 成功執行程式後 將其排入定時任務  
+### 5-1 成功執行程式後 將"token_你的email.json"複製回vps 並將eu.py排入定時任務  
      crontab -e  
   
      0 1 * * * /usr/bin/python3 /root/eu.py  
