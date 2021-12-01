@@ -74,7 +74,7 @@
 **crontab -l是為了查看是否有成功設定crontab**  
   
 ### 續期成功
-[!image](https://github.com/SAOJSM/EU_CHICK_EXTEND_CHT/blob/main/%E7%BA%8C%E6%9C%9F%E6%88%90%E5%8A%9FTG%E9%80%9A%E7%9F%A5.png)
+![image](https://github.com/SAOJSM/EU_CHICK_EXTEND_CHT/blob/main/%E7%BA%8C%E6%9C%9F%E6%88%90%E5%8A%9FTG%E9%80%9A%E7%9F%A5.png)
   
 ### 歡迎多多STAR我的項目  
 ### 若是執行上有什麼問題  
