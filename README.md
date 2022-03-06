@@ -8,6 +8,14 @@
 ### 下面兩項因TRUECAPTCHA每日100次觸發限額，建議修改為自己的
     TRUECAPTCHA_USERID = os.environ.get("TRUECAPTCHA_USERID", "euextend")
     TRUECAPTCHA_APIKEY = os.environ.get("TRUECAPTCHA_APIKEY", "deJhWBaqgd6QDN4BqJGf")
+    
+# 需要修改項目  
+### 下面四項需要修改為自己的
+TG_BOT_TOKEN = '你的TG_BOT_TOKEN'
+TG_USER_ID = '你的TG_USER_ID'
+
+USERNAME = os.environ.get("EUSERV_USERNAME", "你的德雞用戶名")  
+PASSWORD = os.environ.get("EUSERV_PASSWORD", "你的德雞密碼") 
   
   
 # 前置工作  
@@ -50,15 +58,8 @@
 ### 4-4 首次執行安裝完成依賴項輸入以下指令 並黏貼網址到瀏覽器同意授權  
     python3 gmail_api.py 你的email  
 ### 4-5 授權完成後取得"token_你的email.json"
-### 4-6 修改eu.py的這4個項目項目，修改完儲存  
-  
-    TG_BOT_TOKEN = '你的TG BOT TOKEN'  
-    TG_USER_ID = '你的TG USER ID'  
-    USERNAME = os.environ.get("EUSERV_USERNAME", "你的EUSERV USERNAME")    
-    PASSWORD = os.environ.get("EUSERV_PASSWORD", "你的EUSERV PASSWORD")   
-  
-### 4-7 輸入 python3 eu.py  
-### 4-8 等待程式完成，TG機器人會通知  
+### 4-6 輸入 python3 eu.py  
+### 4-7 等待程式完成，TG機器人會通知  
   
 ## 步驟5  
 ### 5-1 成功執行程式後 將"token_你的email.json"複製回vps 並將eu.py排入定時任務  
