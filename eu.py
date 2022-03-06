@@ -16,11 +16,6 @@ from bs4 import BeautifulSoup
 from base64 import urlsafe_b64decode
 from gmail_api import *
 
-# Magic internet access
-import socks, socket
-socks.set_default_proxy()
-socket.socket = socks.socksocket
-
 dir_name = os.path.dirname(os.path.abspath(__file__)) + os.sep
 os.chdir(dir_name)
 
