@@ -21,7 +21,7 @@ os.chdir(dir_name)
 
 TG_BOT_TOKEN = '你的TG_BOT_TOKEN'
 TG_USER_ID = '你的TG_USER_ID'
-TG_API_HOST = os.environ.get('TG_API_HOST', 'api.telegram.org')
+TG_API_HOST = 'api.telegram.org'
 
 # 多個帳戶請使用空格隔開
 USERNAME = os.environ.get("EUSERV_USERNAME", "你的德雞用戶名")  
