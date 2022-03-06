@@ -426,11 +426,11 @@ if __name__ == "__main__":
         for k, v in SERVERS.items():
             if v:
                 if not renew(sessid, s, passwd_list[i], k):
-                    log("[EUserv] ServerID: %s Renew Error!" % k)
+                    log("[EUserv] ServerID: %s 德雞中彈倒地!" % k)
                 else:
-                    log("[EUserv] ServerID: %s has been successfully renewed!" % k)
+                    log("[EUserv] ServerID: %s 德雞續期成功!" % k)
             else:
-                log("[EUserv] ServerID: %s does not need to be renewed" % k)
+                log("[EUserv] ServerID: %s 不須續期" % k)
         time.sleep(15)
         check(sessid, s)
         time.sleep(5)
