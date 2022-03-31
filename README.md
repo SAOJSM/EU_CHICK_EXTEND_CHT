@@ -80,3 +80,7 @@ PASSWORD = os.environ.get("EUSERV_PASSWORD", "你的德雞密碼")
 ### 歡迎多多STAR我的項目  
 ### 若是執行上有什麼問題  
 ### 請透過issue提出
+
+### 錯誤解決
+當出現下方圖片錯誤，代表gmail token過期了，只要重新執行4-4獲取token並替換舊token即可
+![image](https://github.com/SAOJSM/EU_CHICK_EXTEND_CHT/blob/main/%E7%99%BB%E5%85%A5%E5%A4%B1%E6%95%97.jpg)
