@@ -30,7 +30,7 @@ PASSWORD = os.environ.get("EUSERV_PASSWORD", "你的德雞密碼")
 TRUECAPTCHA_USERID = os.environ.get("TRUECAPTCHA_USERID", "euextend")
 TRUECAPTCHA_APIKEY = os.environ.get("TRUECAPTCHA_APIKEY", "deJhWBaqgd6QDN4BqJGf")
 
-PIN_KEY_WORD = 'EUserv - PIN for'
+PIN_KEY_WORD = 'EUserv'
 
 # Maximum number of login retry
 LOGIN_MAX_RETRY_COUNT = 5
