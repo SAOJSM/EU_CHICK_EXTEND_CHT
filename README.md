@@ -1,7 +1,13 @@
 ### 德雞續期專用腳本，實現自動續期，需自有VPS、德雞信箱要是GMAIL  
 ### 僅支援TGBOT通知  
 ### 5分鐘設定  
-### 輕鬆完成德雞續期  
+### 輕鬆完成德雞續期
+
+# 2022/05/04 更新
+因Euserv PIN code寄信主旨改為以下兩種，且Euserv平常也不會寄信來，故關鍵詞改為EUserv
+若有會寫Python篩選式且不用過多行代碼的可以在Pull request提出(因程式訴求為盡量精簡)
+EUserv - PIN for the Confirmation of a Security Check
+EUserv - Attempted Login
   
   
 # TRUECAPTCHA限額  
